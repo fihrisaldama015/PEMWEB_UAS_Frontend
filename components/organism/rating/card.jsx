@@ -14,7 +14,9 @@ export default function CardRating({ product }) {
   const dispatch = useDispatch();
   useEffect(() => {
     try {
-      const selectedProduct = products.filter((p) => p.id_product == id_product)[0];
+      const selectedProduct = products.filter(
+        (p) => p.id_product == id_product
+      )[0];
       setProductDetail(selectedProduct);
     } catch (error) {}
   }, []);
@@ -70,11 +72,22 @@ export default function CardRating({ product }) {
 
   return (
     <div className=" w-full rounded-lg    flex overflow-hidden shadow">
-      <div className=" flex-none w-32 h-28 bg-gray-500">{productDetail && <Image alt="" width={128} height={100} src={`http://malon.my.id:8888/api/seller/file/product/${productDetail?.image[0].filename}`} />}</div>
+      <div className=" flex-none w-32 h-28 bg-gray-500">
+        {productDetail && (
+          <Image
+            alt=""
+            width={128}
+            height={100}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/product/${productDetail?.image[0].filename}`}
+          />
+        )}
+      </div>
       {/* detail */}
       <div className="pr-3 pl-5 py-4 flex flex-col justify-center">
         {/* nama produk */}
-        <div className=" text-[#618D80] text-[10px] mb-2">{productDetail?.name}</div>
+        <div className=" text-[#618D80] text-[10px] mb-2">
+          {productDetail?.name}
+        </div>
         {/* price */}
         <div className="text-[#618D80] text-xs font-bold mb-2">
           Rp. {productDetail.price}/{productDetail.product_uom}

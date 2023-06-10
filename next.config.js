@@ -5,13 +5,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "malon.my.id",
-        port: "8888",
+        protocol: "https",
+        hostname: "pemweb-api.aldam.my.id",
+        port: "",
         pathname: "/**",
       },
     ],
-    domains: ["malon.my.id"],
+    domains: ["pemweb-api.aldam.my.id"],
   },
 };
 

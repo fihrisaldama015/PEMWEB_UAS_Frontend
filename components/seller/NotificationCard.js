@@ -56,12 +56,12 @@ const NotificationCard = ({ data, onConfirm, onReject, onRedeem }) => {
           <div
             style={{
               backgroundImage:
-                "url('http://malon.my.id:8888/api/seller/file/toko/toko-profile-63614961a8b499f7f93fee54.png')",
+                "url('${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/toko-profile-63614961a8b499f7f93fee54.png')",
             }}
             className="bg-cover h-40 w-28 rounded-xl bg-center"
           />
           <Image
-            href="http://malon.my.id:8888/api/seller/file/product/636f6785f62ee69d8894ec1c-1668272499523.jpg"
+            href="${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/product/636f6785f62ee69d8894ec1c-1668272499523.jpg"
             alt="transaction"
             // className="h-auto w-28"
             height={100}

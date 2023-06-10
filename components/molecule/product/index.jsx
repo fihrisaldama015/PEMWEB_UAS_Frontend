@@ -5,7 +5,16 @@ import shop from "../../../assets/svg/shop.svg";
 import Link from "next/link";
 import axios from "axios";
 export default function Product({ product }) {
-  const { qt, image, id_product, toko_id, name, product_uom, product_category, price } = product;
+  const {
+    qt,
+    image,
+    id_product,
+    toko_id,
+    name,
+    product_uom,
+    product_category,
+    price,
+  } = product;
   let productImage;
   if (image.length > 0) {
     productImage = image[0].filename;
@@ -16,7 +25,9 @@ export default function Product({ product }) {
   useEffect(() => {
     const getStoreData = async (toko_id) => {
       try {
-        const res = await axios.get(`http://malon.my.id:8888/api/user/v1/toko/data/${toko_id}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/toko/data/${toko_id}`
+        );
         const data = res.data.data;
         const { name, image_profile } = data;
         setStoreName(name);
@@ -30,7 +41,9 @@ export default function Product({ product }) {
   useEffect(() => {
     try {
       const getRatingProduct = async (id_product) => {
-        const res = await axios.get(`http://malon.my.id:8888/api/seller/v1/product/data/${id_product}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/product/data/${id_product}`
+        );
         const data = res.data.data;
         const allStar = data.stars;
         let totalStars = 0;
@@ -70,11 +83,20 @@ export default function Product({ product }) {
         {/* Empty */}
         {isEmpty && (
           <div className=" w-full h-full flex items-center justify-center absolute bg-black z-10 bg-opacity-50">
-            <div className=" bg-[#FB7777] text-white h-9  w-32 flex items-center justify-center rounded-3xl ">Habis</div>
+            <div className=" bg-[#FB7777] text-white h-9  w-32 flex items-center justify-center rounded-3xl ">
+              Habis
+            </div>
           </div>
         )}
         <div className="bg-gray-100 w-full  h-32 overflow-hidden  ">
-          <Image priority width={120} height={120} className=" w-full h-full object-cover" alt="" src={`http://malon.my.id:8888/api/seller/file/product/${productImage}`} />
+          <Image
+            priority
+            width={120}
+            height={120}
+            className=" w-full h-full object-cover"
+            alt=""
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/product/${productImage}`}
+          />
         </div>
         {/* DETAIL*/}
         <div className="py-1 px-3 flex-col h-28 ">
@@ -83,7 +105,9 @@ export default function Product({ product }) {
             <p className=" text-xs font-bold text-[#618D80] mt-2">
               Rp {price}/{product_uom}
             </p>
-            <div className=" flex gap-1 mt-1">{ratings.map((component) => component)}</div>
+            <div className=" flex gap-1 mt-1">
+              {ratings.map((component) => component)}
+            </div>
           </div>
           <div className="flex items-center absolute bottom-3 ">
             <span className=" mr-2">

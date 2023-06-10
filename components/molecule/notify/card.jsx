@@ -16,7 +16,9 @@ export default function NotifyCard({ id }) {
   useEffect(() => {
     const getTransaction = async (id) => {
       try {
-        const res = await axios.get(`http://malon.my.id:8888/api/seller/v1/transaction/data/${id}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/transaction/data/${id}`
+        );
         const dataTransaction = res.data.data;
         const total_price = getTotalPrice(dataTransaction.transaction);
         const { status, _id_toko } = dataTransaction.transaction;
@@ -33,7 +35,9 @@ export default function NotifyCard({ id }) {
     const getShopData = async (id) => {
       try {
         if (id) {
-          const { data } = await axios.get(`http://malon.my.id:8888/api/user/v1/toko/data/${id}`);
+          const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/toko/data/${id}`
+          );
           const shopData = data.data;
           setShopData(shopData);
         }
@@ -49,7 +53,9 @@ export default function NotifyCard({ id }) {
     const getFileName = async () => {
       try {
         if (shopData) {
-          const { data } = await axios.get(`http://malon.my.id:8888/api/user/v1/toko/image/${shopData?.image_profile}`);
+          const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/toko/image/${shopData?.image_profile}`
+          );
           const fileName = data.data.filename;
           setFileNameShop(fileName);
         }
@@ -66,7 +72,13 @@ export default function NotifyCard({ id }) {
             <div className=" w-full  px-5 py-3 shadow-md rounded-md flex">
               {fileNameShop ? (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden ">
-                  <Image className="w-full h-full  object-cover" alt="" width={80} height={80} src={`http://malon.my.id:8888/api/seller/file/toko/${fileNameShop}`} />
+                  <Image
+                    className="w-full h-full  object-cover"
+                    alt=""
+                    width={80}
+                    height={80}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/${fileNameShop}`}
+                  />
                 </div>
               ) : (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden "></div>
@@ -78,16 +90,22 @@ export default function NotifyCard({ id }) {
                   <span className=" mr-2">
                     <Image src={shop} alt="tes" width={21} height={21} />
                   </span>
-                  <p className=" text-[#618D80] text-base">{shopData ? shopData.name : ""}</p>
+                  <p className=" text-[#618D80] text-base">
+                    {shopData ? shopData.name : ""}
+                  </p>
                 </div>
                 {/*  harga */}
                 <div>
-                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">Rp {total_price}</p>
+                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">
+                    Rp {total_price}
+                  </p>
                 </div>
                 {/* STATUS */}
                 <div>
                   <div className="border border-[#CFA948] py-2 px-5 rounded-lg">
-                    <p className=" font-bold text-[#CFA948] text-xs">Menunggu konfirmasi</p>
+                    <p className=" font-bold text-[#CFA948] text-xs">
+                      Menunggu konfirmasi
+                    </p>
                   </div>
                 </div>
               </div>
@@ -102,7 +120,13 @@ export default function NotifyCard({ id }) {
             <div className=" w-full  px-5 py-3 shadow-md rounded-md flex">
               {fileNameShop ? (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden ">
-                  <Image className="w-full h-full  object-cover" alt="" width={80} height={80} src={`http://malon.my.id:8888/api/seller/file/toko/${fileNameShop}`} />
+                  <Image
+                    className="w-full h-full  object-cover"
+                    alt=""
+                    width={80}
+                    height={80}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/${fileNameShop}`}
+                  />
                 </div>
               ) : (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden "></div>
@@ -114,16 +138,22 @@ export default function NotifyCard({ id }) {
                   <span className=" mr-2">
                     <Image src={shop} alt="tes" width={21} height={21} />
                   </span>
-                  <p className=" text-[#618D80]  text-base">{shopData ? shopData.name : ""}</p>
+                  <p className=" text-[#618D80]  text-base">
+                    {shopData ? shopData.name : ""}
+                  </p>
                 </div>
                 {/*  harga */}
                 <div>
-                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">Rp {total_price}</p>
+                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">
+                    Rp {total_price}
+                  </p>
                 </div>
                 {/* STATUS */}
                 <div>
                   <div className="border border-[#FB7777] py-2 px-5 rounded-lg">
-                    <p className=" font-bold text-[#FB7777] text-xs">Transaksi Ditolak</p>
+                    <p className=" font-bold text-[#FB7777] text-xs">
+                      Transaksi Ditolak
+                    </p>
                   </div>
                 </div>
               </div>
@@ -138,7 +168,13 @@ export default function NotifyCard({ id }) {
             <div className=" w-full  px-5 py-3 shadow-md rounded-md flex">
               {fileNameShop ? (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden ">
-                  <Image className="w-full h-full  object-cover" alt="" width={80} height={80} src={`http://malon.my.id:8888/api/seller/file/toko/${fileNameShop}`} />
+                  <Image
+                    className="w-full h-full  object-cover"
+                    alt=""
+                    width={80}
+                    height={80}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/${fileNameShop}`}
+                  />
                 </div>
               ) : (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden "></div>
@@ -150,16 +186,22 @@ export default function NotifyCard({ id }) {
                   <span className=" mr-2">
                     <Image src={shop} alt="tes" width={21} height={21} />
                   </span>
-                  <p className=" text-[#618D80]  text-base">{shopData ? shopData.name : ""}</p>
+                  <p className=" text-[#618D80]  text-base">
+                    {shopData ? shopData.name : ""}
+                  </p>
                 </div>
                 {/*  harga */}
                 <div>
-                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">Rp {total_price}</p>
+                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">
+                    Rp {total_price}
+                  </p>
                 </div>
                 {/* STATUS */}
                 <div>
                   <div className=" border border-[#618D80] py-2 px-5 rounded-lg">
-                    <p className=" font-bold text-[#618D80]  text-xs">Pesanan Dikonfirmasi</p>
+                    <p className=" font-bold text-[#618D80]  text-xs">
+                      Pesanan Dikonfirmasi
+                    </p>
                   </div>
                 </div>
               </div>
@@ -174,7 +216,13 @@ export default function NotifyCard({ id }) {
             <div className=" w-full  px-5 py-3 shadow-md rounded-md flex">
               {fileNameShop ? (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden ">
-                  <Image className="w-full h-full  object-cover" alt="" width={80} height={80} src={`http://malon.my.id:8888/api/seller/file/toko/${fileNameShop}`} />
+                  <Image
+                    className="w-full h-full  object-cover"
+                    alt=""
+                    width={80}
+                    height={80}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/${fileNameShop}`}
+                  />
                 </div>
               ) : (
                 <div className="w-14 h-14 bg-gray-500 rounded-full overflow-hidden "></div>
@@ -186,16 +234,22 @@ export default function NotifyCard({ id }) {
                   <span className=" mr-2">
                     <Image src={shop} alt="tes" width={21} height={21} />
                   </span>
-                  <p className=" text-[#618D80]  text-base">{shopData ? shopData.name : ""}</p>
+                  <p className=" text-[#618D80]  text-base">
+                    {shopData ? shopData.name : ""}
+                  </p>
                 </div>
                 {/*  harga */}
                 <div>
-                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">Rp {total_price}</p>
+                  <p className=" mt-3 mb-2 text-base font-bold text-[#618D80] ">
+                    Rp {total_price}
+                  </p>
                 </div>
                 {/* STATUS */}
                 <div>
                   <div className=" bg-[#618D80] py-2 px-5 rounded-lg">
-                    <p className=" font-bold text-white text-xs">Transaksi Selesai</p>
+                    <p className=" font-bold text-white text-xs">
+                      Transaksi Selesai
+                    </p>
                   </div>
                 </div>
               </div>

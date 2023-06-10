@@ -16,7 +16,11 @@ import fakeImage from "../../assets/img/gabi-miranda-dxb_HSjoQ40-unsplash.png";
 import axios from "axios";
 import shop from "../../assets/svg/shop.svg";
 import Rating from "../../components/atom/rating";
-import { selectAllDataTransaction, selectAllTransaction, selectRatingArr } from "../../store/alltransaction/alltransaction.selector";
+import {
+  selectAllDataTransaction,
+  selectAllTransaction,
+  selectRatingArr,
+} from "../../store/alltransaction/alltransaction.selector";
 import CardRating from "../../components/organism/rating/card";
 import { saveRating } from "../../store/alltransaction/alltransaction.action";
 import { deleteTransaction } from "../../store/alltransaction/alltransaction.action";
@@ -32,7 +36,9 @@ export default function RatingProduct() {
   useEffect(() => {
     const getTransaction = async (transactionId) => {
       try {
-        const res = await axios.get(`http://malon.my.id:8888/api/seller/v1/transaction/data/${transactionId}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/transaction/data/${transactionId}`
+        );
         const data = res.data.data;
         setTransactionDetail(data);
       } catch (error) {}
@@ -47,7 +53,9 @@ export default function RatingProduct() {
     const getShopData = async (id) => {
       try {
         if (id) {
-          const { data } = await axios.get(`http://malon.my.id:8888/api/user/v1/toko/data/${id}`);
+          const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/toko/data/${id}`
+          );
           const shopData = data.data;
           setShopData(shopData);
         }
@@ -119,7 +127,7 @@ export default function RatingProduct() {
           try {
             const res = await axios({
               method: "post",
-              url: `http://malon.my.id:8888/api/seller/v1/product/star/${element.idProduct}`,
+              url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/product/star/${element.idProduct}`,
               data: { star: element.star },
             });
             const data = res.data.data;
@@ -185,7 +193,10 @@ export default function RatingProduct() {
                   <CardRating key={i} product={prod} />
                 ))}
 
-                <button onClick={handleSendRating} className=" -bottom-28  text-base w-44 absolute right-0 rounded-xl bg-[#618D80] px-2 py-3  flex justify-center text-white font-bold">
+                <button
+                  onClick={handleSendRating}
+                  className=" -bottom-28  text-base w-44 absolute right-0 rounded-xl bg-[#618D80] px-2 py-3  flex justify-center text-white font-bold"
+                >
                   Kirim Rating
                 </button>
               </div>

@@ -4,14 +4,20 @@ import { TRANSACTION_ACTION_TYPES } from "./transaction.types";
 import { saveTransaction } from "../alltransaction/alltransaction.action";
 import axios from "axios";
 
-const confirmTransactionFailed = (payload) => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_FAILED, payload);
-const setTransactionForm = (payload) => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_SET_FORM, payload);
+const confirmTransactionFailed = (payload) =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_FAILED, payload);
+const setTransactionForm = (payload) =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_SET_FORM, payload);
 
-const transactionCloseForm = () => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_CLOSE);
-const confirmTransactionStart = () => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_START);
-const confirmTransactionSuccess = () => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_SUCCESS);
+const transactionCloseForm = () =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_CLOSE);
+const confirmTransactionStart = () =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_START);
+const confirmTransactionSuccess = () =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_CONFIRM_SUCCESS);
 
-export const transactionBuy = (payload) => createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_BUY, payload);
+export const transactionBuy = (payload) =>
+  createAction(TRANSACTION_ACTION_TYPES.TRANSACTION_BUY, payload);
 export const closeFormTransaction = (dispatch) => {
   Swal.fire({
     title: "Anda ingin membatalkan pembelian?",
@@ -39,7 +45,7 @@ export const confirmTransactionAsync = (data_order, allTransactionId) => {
     try {
       const createTransaction = await axios({
         method: "post",
-        url: `http://malon.my.id:8888/api/seller/v1/transaction/createtransaction`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/transaction/createtransaction`,
         data: data_order,
       });
       const resCreateTransaction = createTransaction.data.data;
@@ -55,6 +61,9 @@ export const confirmTransactionAsync = (data_order, allTransactionId) => {
 };
 export const getTotalPrice = (selectedCarts) => {
   let total = 0;
-  total = selectedCarts.cart.reduce((pre, current) => pre + current.total_price, 0);
+  total = selectedCarts.cart.reduce(
+    (pre, current) => pre + current.total_price,
+    0
+  );
   return total;
 };

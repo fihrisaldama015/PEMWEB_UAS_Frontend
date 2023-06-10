@@ -5,7 +5,10 @@ import shop from "../../../assets/svg/shop.svg";
 import fakeImage from "../../../assets/img/gabi-miranda-dxb_HSjoQ40-unsplash.png";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../../store/products/products.selector";
-import { fetchProductsAsync, getNameProd } from "../../../store/products/produtcs.action";
+import {
+  fetchProductsAsync,
+  getNameProd,
+} from "../../../store/products/produtcs.action";
 import { selectCart } from "../../../store/cart/cart.selector";
 export default function CartCard({ data, storeId }) {
   const products = useSelector(selectProducts);
@@ -28,7 +31,9 @@ export default function CartCard({ data, storeId }) {
   const [product, setProduct] = useState("");
   useEffect(() => {
     const getProd = async (id_product) => {
-      const res = await axios.get(`http://malon.my.id:8888/api/seller/v1/product/data/${id_product}`);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/v1/product/data/${id_product}`
+      );
       const data = res.data.data;
       setProduct(data);
     };
@@ -41,7 +46,9 @@ export default function CartCard({ data, storeId }) {
     const getShopData = async (id) => {
       try {
         if (id) {
-          const { data } = await axios.get(`http://malon.my.id:8888/api/user/v1/toko/data/${id}`);
+          const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/toko/data/${id}`
+          );
           const shopData = data.data;
           setShopData(shopData);
         }
@@ -53,7 +60,14 @@ export default function CartCard({ data, storeId }) {
   return (
     <div className=" w-full rounded-lg h-24  flex overflow-hidden shadow">
       <div className=" flex-none w-32  h-full bg-gray-500">
-        <Image priority width={80} height={80} className=" w-full h-full object-cover" alt="" src={`http://malon.my.id:8888/api/seller/file/product/${product?.product?.image[0]?.filename}`} />
+        <Image
+          priority
+          width={80}
+          height={80}
+          className=" w-full h-full object-cover"
+          alt=""
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/product/${product?.product?.image[0]?.filename}`}
+        />
       </div>
       {/* detail */}
       <div className="pr-3 pl-5 py-4 flex flex-col w-full">
@@ -69,7 +83,9 @@ export default function CartCard({ data, storeId }) {
 
         {/* price */}
         <div className=" flex justify-between   w-full">
-          <div className="text-[#618D80] text-xs font-bold">Rp. {data.total_price}</div>
+          <div className="text-[#618D80] text-xs font-bold">
+            Rp. {data.total_price}
+          </div>
           <div className=" flex gap-4 items-center">
             <div className="text-[#618D80] text-xs font-bold grow-0 shrink-0">
               {data.qt} {data.product_uom}

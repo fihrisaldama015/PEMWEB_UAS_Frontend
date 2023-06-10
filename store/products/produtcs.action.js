@@ -25,7 +25,9 @@ export const fetchProductsAsync = () => {
   return async (dispatch) => {
     dispatch(fetchProductsStart());
     try {
-      const { data } = await axios.get("http://malon.my.id:8888/api/user/v1/product/all");
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/v1/product/all`
+      );
       const allProduct = data.data;
       dispatch(fetchProductsSuccess(allProduct));
     } catch (error) {

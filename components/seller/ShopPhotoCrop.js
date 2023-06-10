@@ -10,7 +10,7 @@ const ShopPhotoCrop = ({ image }) => {
     <div className="">
       <div className="relative w-96 h-96">
         <Cropper
-          //   image="http://malon.my.id:8888/api/seller/file/toko/toko-profile-63614961a8b499f7f93fee54.png"
+          //   image="${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/toko/toko-profile-63614961a8b499f7f93fee54.png"
           image={image}
           crop={crop}
           zoom={zoom}

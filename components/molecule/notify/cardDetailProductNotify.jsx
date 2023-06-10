@@ -23,7 +23,16 @@ export default function CardDetailProductNotify({ product }) {
     <div>
       <div className="w-full h-20 rounded-md shadow-md overflow-hidden flex">
         <div className=" w-24 h-full bg-gray-400">
-          <Image src={`http://malon.my.id:8888/api/seller/file/product/${image ? image : ""}`} alt="" width="110" height="110" layout="fill" objectFit="contain" />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/api/seller/file/product/${
+              image ? image : ""
+            }`}
+            alt=""
+            width="110"
+            height="110"
+            layout="fill"
+            objectFit="contain"
+          />
         </div>
         <div className="px-3 flex flex-col justify-center w-full">
           <div>
@@ -31,7 +40,9 @@ export default function CardDetailProductNotify({ product }) {
           </div>
           <div className="mt-1 w-full">
             <div className=" flex justify-between ">
-              <div className=" text-[#618D80] font-bold text-xs ">Rp {total_price}</div>
+              <div className=" text-[#618D80] font-bold text-xs ">
+                Rp {total_price}
+              </div>
               <div className=" text-[#618D80] text-xs">
                 {qt} {product_uom}
               </div>
